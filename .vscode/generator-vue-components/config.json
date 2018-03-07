@@ -1,0 +1,21 @@
+{
+  "lang": "en",
+  "default": {
+    "template": "component",
+    "name": "component",
+    "path": "/src/components/"
+  },
+  "lists": {
+    "template": true,
+    "path": [
+      "/src/"
+    ],
+    "name": [
+      "Login"
+    ]
+  },
+  "templates": {
+    "global": [],
+    "local": []
+  }
+}
