@@ -1,6 +1,7 @@
 # cards
 
 > Управление задачами
+crtl + mousemove = перетаскивание заметки
 
 ## Build Setup
 
