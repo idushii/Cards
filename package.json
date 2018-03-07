@@ -1,6 +1,6 @@
 {
-  "name": "cards",
-  "description": "Управление задачами",
+  "name": "the-note",
+  "description": "Заметки на полях",
   "version": "1.0.0",
   "author": "Nicolay <nic.nic343@ya.ru>",
   "license": "MIT",
