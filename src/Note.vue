@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import moment from "moment";
 
 export default {
@@ -36,13 +36,15 @@ export default {
     Note() {
       return this.$store.getters.Note(this.id);
     },
-    ...mapGetters(["isMoveNote"]),
+    ...mapState({
+        isMove: state => state.Notes.Move.isMove
+      })
   },
   mounted() {},
   methods: {
     processMove(e) {
       this.isCtrl = true
-      if (this.isMoveNote) {
+      if (this.isMove) {
         this.$store.commit("processMove", { Top: e.y, Left: e.x });
       }
     },

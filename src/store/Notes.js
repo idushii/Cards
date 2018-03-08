@@ -1,4 +1,4 @@
-export default {
+let ListNotes = {
   state: {
     List: [{
       id: 1,
@@ -25,6 +25,7 @@ export default {
   mutations: {
     add(state, {Note}) {
       state.List.push(Note)
+      localStorage['Notes.ListNotes'] = JSON.stringify(state.List)
     },
     startMove(state, {id, Top, Left}) {
       state.Move.idNote = id;
@@ -41,6 +42,7 @@ export default {
     endMove(state) {
       state.Move.isMove = false;
       state.Move.idNote = false;
+      localStorage['Notes.ListNotes'] = JSON.stringify(state.List)
     },
     toggleEditNote(state, { id }) {
       let index = state.List.reduce((result, Note, index) => Note.id == id ? index : result, null)
@@ -74,3 +76,6 @@ export default {
   }
 }
 
+if (localStorage['Notes.ListNotes']) ListNotes.state.List = JSON.parse(localStorage['Notes.ListNotes'])
+
+export default ListNotes;
