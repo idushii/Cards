@@ -1,5 +1,9 @@
 <template>
-  <div id="app" @mousemove="processMove" @click="$store.commit('toggleContextMenu', {Hide: true})">
+  <div id="app" 
+    @mousemove="processMove" 
+    @click="$store.dispatch('hideContext')"
+    @click.right.prevent="e => $store.dispatch('showContex', {Top: e.y, Left: e.x, Show: true, Type: 'List', e})"
+  >
     <router-view></router-view>
   </div>
 </template>
@@ -18,9 +22,9 @@ export default {
   },
   methods: {
     processMove(e) {
-      if (this.isMoveNote)        this.$store.commit("processMove", { Top: e.y, Left: e.x });
+      if (this.isMoveNote)    this.$store.commit("processMove", { Top: e.y, Left: e.x });
       if (this.isMovePanel)   this.$store.commit("processMovePanel", { Top: e.y, Left: e.x });
-    }
+    },
   },
   mounted() {
   }

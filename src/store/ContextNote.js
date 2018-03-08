@@ -1,19 +1,21 @@
 export default {
   state: {
     Position: { Top: 0, Left: 0 },
-    isShow: false
+    isShow: false,
+    idNote: null,
   },
   mutations: {
-    toggleContextMenu(state, {Top = null, Left = null, Hide = false, Show = false}) {
+    toggleContextNote(state, {Top = null, Left = null, Hide = false, Show = false, id = null}) {
       if (Hide) state.isShow = false
       if (Show) state.isShow = true
       if (!Hide && !Show) state.isShow = !state.isShow
+      state.idNote = id;
       state.Position = { Top, Left }
     }
   },
   actions: {},
   getters: {
-    positionContextMenu: state => state.Position,
-    isShowContextMenu: state => state.isShow
+    positionContextNote: state => state.Position,
+    isShowContextNote: state => state.isShow
   },
 }

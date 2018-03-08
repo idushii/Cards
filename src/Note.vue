@@ -2,7 +2,7 @@
   <div
      class="card" 
     :style="{width: `${Note.Width}px`, top: `${Note.Top}px`, left: `${Note.Left}px`}" 
-    @click.right.prevent="e => $store.commit('toggleContextMenu', {Top: e.y, Left: e.x, Show: true})">
+    @click.right.prevent="e => $store.dispatch('showContex', {Top: e.y, Left: e.x, Show: true, id, Type: 'Note', e})">
     <div 
       class="card-header" 
       :style="{cursor: isCtrl ? 'move' : 'default'}"

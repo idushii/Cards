@@ -2,14 +2,11 @@
   <ul 
     class="list-group" 
     id="ContextNote" 
-    v-show="isShowContextNote" 
-    :style="{ top: positionContextNote.Top+'px', left: positionContextNote.Left+'px' }"
+    v-show="isShow" 
+    :style="{ top: Position.Top+'px', left: Position.Left+'px' }"
     @click.right.prevent
   >
-    <li class="list-group-item">Переименовать</li>
-    <li class="list-group-item">Изменить</li>
-    <li class="list-group-item">Архивировать</li>
-    <li class="list-group-item list-group-item-danger">Удалить</li>
+    <li class="list-group-item">Показать панель элементов</li>
     <!--li class="list-group-item list-group-item-primary">dddd</li>
     <li class="list-group-item list-group-item-secondary">dddd</li>
     <li class="list-group-item list-group-item-success">dddd</li>
@@ -22,15 +19,18 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
-  name: "ContextNote",
+  name: "ContextListNotes",
   props: { idNote: { type: Number } },
   data() {
     return {};
   },
   computed: {
-    ...mapGetters(["isShowContextNote", "positionContextNote"])
+    ...mapState({
+        isShow: state => state.ContextListNotes.isShow,
+        Position: state => state.ContextListNotes.Position,
+      })
   },
   mounted() {},
   methods: {}
@@ -41,7 +41,7 @@ export default {
 <style scoped>
  #ContextNote {
    position: absolute;
-   max-width: 200px;
+   max-width: 300px;
    cursor: pointer;
  }
 </style>

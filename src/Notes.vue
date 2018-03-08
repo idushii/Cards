@@ -3,6 +3,7 @@
     <Panel />
     <Note v-for="(Note, index) in ListNotes" :id="Note.id" :key="`note-${index}`" />
     <ContextNote />
+    <ContextListNotes />
   </div>
 </template>
 
