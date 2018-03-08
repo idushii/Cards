@@ -5,11 +5,9 @@
     @click.right.prevent="e => $store.dispatch('showContex', {Top: e.y, Left: e.x, Show: true, id, Type: 'Note', e})">
     <div 
       class="card-header" 
-      :style="{cursor: isCtrl ? 'move' : 'default'}"
-      @keyup.down="isCtrl = true"
-      @mousedown.ctrl="e => $store.commit('startMove', { id, Top: e.y, Left: e.x })" 
-      @mousemove="isCtrl = false"
-      @mousemove.ctrl="processMove"
+      :style="{cursor: 'move'}"
+      @mousedown="e => $store.commit('startMove', { id, Top: e.y, Left: e.x })" 
+      @mousemove="processMove"
       @mouseup="endMove">
         {{Note.Title}}</div>
     <div class="card-body" v-if="!Note.isEdit">{{Note.Values.Text}}</div>
@@ -29,7 +27,6 @@ export default {
   props: { id: { type: Number, required: true } },
   data() {
     return {
-      isCtrl: false
     };
   },
   computed: {
@@ -43,7 +40,6 @@ export default {
   mounted() {},
   methods: {
     processMove(e) {
-      this.isCtrl = true
       if (this.isMove) {
         this.$store.commit("processMove", { Top: e.y, Left: e.x });
       }
