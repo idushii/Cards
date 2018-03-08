@@ -6,13 +6,18 @@
     <div 
       class="card-header" 
       :style="{cursor: 'move'}"
-      @mousedown="e => $store.commit('startMove', { id, Top: e.y, Left: e.x })" 
-      @mousemove="processMove"
-      @mouseup="endMove">
+      @mousedown.left="e => $store.commit('startMove', { id, Top: e.y, Left: e.x })" 
+      @mousemove.left="processMove"
+      @mouseup.left="endMove">
         {{Note.Title}}</div>
     <div class="card-body" v-if="!Note.isEdit">{{Note.Values.Text}}</div>
     <div class="card-body" v-if="Note.isEdit">
-      <textarea class="form-control" :value="Note.Values.Text" @keydown.esc="$store.commit('toggleEditNote', { id })"></textarea>
+      <textarea 
+        class="form-control" 
+        :value="Note.Values.Text" 
+        @keydown.esc="$store.dispatch('toggleEditNote', { id })"
+        @keydown.enter.ctrl="e => $store.dispatch('setTextNote', {Text: e.target.value, id})"
+      ></textarea>
     </div>
     <div class="card-footer text-center"><small>Последнее изменение {{Note.Date.Update | moment}}</small></div>
   </div>

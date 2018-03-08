@@ -13,6 +13,9 @@ var vuex = new Vuex.Store({
   state: {
   },
   mutations: {
+    save(state) {
+      localStorage['Notes.ListNotes'] = JSON.stringify(state.Notes.List)
+    }
   },
   getters: {
   },
@@ -21,11 +24,14 @@ var vuex = new Vuex.Store({
       commit('toggleContextNote', {Hide: true})
       commit('toggleContextListNotes', {Hide: true})
     },
-    showContex({commit, dispatch, state}, {Top, Left, Show, Hide, e, id, Type = 'List'}) {
-      dispatch('hideContext');
-      if (e.path.slice(0, 3).map(p => p.classList.value).indexOf("card") > -1) {
+    showContex({commit, dispatch, state}, {Top, Left, Show, Hide, e, id, Type = 'Note'}) {
+      let isNote = e.path.slice(0, 3).map(p => p.classList.value).indexOf("card") > -1
+      if (isNote && Type == 'Note') {
+        commit('toggleContextListNotes', {Hide: true})
         commit('toggleContextNote', {Top, Left, Show, Hide, id})
-      } else {
+      } 
+      if( !isNote && Type == 'List' ) {
+        commit('toggleContextNote', {Hide: true})
         commit('toggleContextListNotes', {Top, Left, Show, Hide})
       }
     }

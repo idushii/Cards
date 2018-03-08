@@ -16,6 +16,7 @@ export default {
   actions: {},
   getters: {
     positionContextNote: state => state.Position,
-    isShowContextNote: state => state.isShow
+    isShowContextNote: state => state.isShow,
+    idContextNote: state => state.idNote,
   },
 }

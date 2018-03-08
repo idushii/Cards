@@ -44,10 +44,12 @@ let ListNotes = {
       state.Move.idNote = false;
       localStorage['Notes.ListNotes'] = JSON.stringify(state.List)
     },
-    toggleEditNote(state, { id }) {
-      let index = state.List.reduce((result, Note, index) => Note.id == id ? index : result, null)
-      console.log(state.List[index])
+    toggleEditNote(state, { index }) {
       state.List[index].isEdit = !state.List[index].isEdit
+    },
+    setTextNote(state, { index, Text }) {
+      state.List[index].Values.Text = Text
+      state.List[index].Date.Update = new Date()
     }
   },
   getters: {
@@ -72,7 +74,20 @@ let ListNotes = {
       }
     },
     MoveNote: state => state.Move,
-    isMoveNote: state => state.Move.isMove
+    isMoveNote: state => state.Move.isMove,
+    indexNoteByID: state => id => state.List.reduce((result, Note, index) => Note.id == id ? index : result, null)
+  },
+  actions: {
+    toggleEditNote({state, commit, getters}, { id }) {
+      let index = getters.indexNoteByID(id)
+      commit('toggleEditNote', { index })
+    },
+    setTextNote({state, commit, getters}, { id, Text }) {
+      let index = getters.indexNoteByID(id)
+      commit('setTextNote', { index, Text })
+      commit('toggleEditNote', { index })
+      commit('save')
+    }
   }
 }
 

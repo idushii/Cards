@@ -7,7 +7,7 @@
     @click.right.prevent
   >
     <li class="list-group-item">Переименовать</li>
-    <li class="list-group-item">Изменить</li>
+    <li class="list-group-item" @click="$store.dispatch('toggleEditNote', {id: idContextNote})">Изменить</li>
     <li class="list-group-item">Архивировать</li>
     <li class="list-group-item list-group-item-danger">Удалить</li>
     <!--li class="list-group-item list-group-item-primary">dddd</li>
@@ -25,12 +25,11 @@
 import { mapGetters } from "vuex";
 export default {
   name: "ContextNote",
-  props: { idNote: { type: Number } },
   data() {
     return {};
   },
   computed: {
-    ...mapGetters(["isShowContextNote", "positionContextNote"])
+    ...mapGetters(["isShowContextNote", "positionContextNote", "idContextNote"])
   },
   mounted() {},
   methods: {}
