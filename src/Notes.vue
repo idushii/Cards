@@ -1,7 +1,7 @@
 <template>
   <div>
     <Panel />
-    <Note v-for="(Note, index) in List" :id="Note.id" :key="`note-${index}`" />
+    <Note v-for="(Note, index) in ListNotes" :id="Note.id" :key="`note-${index}`" />
     <ContextNote />
   </div>
 </template>
@@ -17,12 +17,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isMove", "List"])
+    ...mapGetters(["ListNotes"])
   },
-  mounted() {},
-  methods: {
-    startMove(e) { this.$emit('startMove', e) }
-  },
+  mounted() {  },
+  methods: {  },
   components: { Panel }
 };
 </script>

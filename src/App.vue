@@ -14,11 +14,11 @@ export default {
     };
   },
   computed: {
-      ...mapGetters(["isMove", "isMovePanel"]),
+      ...mapGetters(["isMoveNote", "isMovePanel"]),
   },
   methods: {
     processMove(e) {
-      if (this.isMove)        this.$store.commit("processMove", { Top: e.y, Left: e.x });
+      if (this.isMoveNote)        this.$store.commit("processMove", { Top: e.y, Left: e.x });
       if (this.isMovePanel)   this.$store.commit("processMovePanel", { Top: e.y, Left: e.x });
     }
   },

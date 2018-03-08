@@ -36,13 +36,13 @@ export default {
     Note() {
       return this.$store.getters.Note(this.id);
     },
-    ...mapGetters(["isMove"]),
+    ...mapGetters(["isMoveNote"]),
   },
   mounted() {},
   methods: {
     processMove(e) {
       this.isCtrl = true
-      if (this.isMove) {
+      if (this.isMoveNote) {
         this.$store.commit("processMove", { Top: e.y, Left: e.x });
       }
     },
