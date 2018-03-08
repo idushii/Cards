@@ -1,5 +1,5 @@
 <template>
-  <div id="app" @mousemove="processMove">
+  <div id="app" @mousemove="processMove" @click="$store.commit('toggleContextMenu', {Hide: true})">
     <router-view></router-view>
   </div>
 </template>

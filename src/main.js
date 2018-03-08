@@ -12,6 +12,7 @@ import router from './router.js'
 import store from './store'
 
 import Note from './Note.vue';  Vue.component("Note", Note);
+import ContextNote from './ContextNote.vue';    Vue.component("ContextNote", ContextNote);
 import App from './App.vue';    Vue.component("App", App);
 
 

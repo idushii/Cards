@@ -1,7 +1,8 @@
 <template>
   <div
      class="card" 
-    :style="{width: `${Card.Width}px`, top: `${Card.Top}px`, left: `${Card.Left}px`}" >
+    :style="{width: `${Note.Width}px`, top: `${Note.Top}px`, left: `${Note.Left}px`}" 
+    @click.right.prevent="e => $store.commit('toggleContextMenu', {Top: e.y, Left: e.x, Show: true})">
     <div 
       class="card-header" 
       :style="{cursor: isCtrl ? 'move' : 'default'}"
@@ -10,9 +11,12 @@
       @mousemove="isCtrl = false"
       @mousemove.ctrl="processMove"
       @mouseup="endMove">
-        {{Card.Title}}</div>
-    <div class="card-body">{{Card.Values.Text}}</div>
-    <div class="card-footer text-center"><small>Последнее изменение {{Card.Date.Update | moment}}</small></div>
+        {{Note.Title}}</div>
+    <div class="card-body" v-if="!Note.isEdit">{{Note.Values.Text}}</div>
+    <div class="card-body" v-if="Note.isEdit">
+      <textarea class="form-control" :value="Note.Values.Text" @keydown.esc="$store.commit('toggleEditNote', { id })"></textarea>
+    </div>
+    <div class="card-footer text-center"><small>Последнее изменение {{Note.Date.Update | moment}}</small></div>
   </div>
 </template>
 
@@ -29,8 +33,8 @@ export default {
     };
   },
   computed: {
-    Card() {
-      return this.$store.getters.Card(this.id);
+    Note() {
+      return this.$store.getters.Note(this.id);
     },
     ...mapGetters(["isMove"]),
   },

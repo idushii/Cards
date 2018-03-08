@@ -2,11 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import Panel from "./panel"
+import ContextMenu from "./ContextMenu"
 
 Vue.use(Vuex)
 
 var vuex = new Vuex.Store({
-  modules: { Panel },
+  modules: { Panel, ContextMenu },
   state: {
     List: [{
       id: 1,
@@ -21,42 +22,48 @@ var vuex = new Vuex.Store({
         Type: "Text",
         Font: { Size: 14, },
         Text: "Lorem ipsum..."
-      }
+      },
+      isEdit: false
     }],
     Move: {
       CurPos: { Top: null, Left: null },
       isMove: false, 
-      idCard: null
+      idNote: null
     }
   },
   mutations: {
-    add(state, { Card }) {
-      state.List.push(Card)
+    add(state, {Note}) {
+      state.List.push(Note)
     },
     startMove(state, {id, Top, Left}) {
-      state.Move.idCard = id;
+      state.Move.idNote = id;
       state.Move.CurPos = { Top, Left }
       state.Move.isMove = true;
     },
     processMove(state, {Top, Left}) {
       if (!state.Move.isMove) return;
-      let index = state.List.reduce((result, card, index) => card.id == state.Move.idCard ? index : result, null)
+      let index = state.List.reduce((result, Note, index) => Note.id == state.Move.idNote ? index : result, null)
       state.List[index].Top += Top - state.Move.CurPos.Top
       state.List[index].Left += Left - state.Move.CurPos.Left
       state.Move.CurPos = { Top, Left }
     },
     endMove(state) {
       state.Move.isMove = false;
-      state.Move.idCard = false;
+      state.Move.idNote = false;
     },
+    toggleEditNote(state, { id }) {
+      let index = state.List.reduce((result, Note, index) => Note.id == id ? index : result, null)
+      console.log(state.List[index])
+      state.List[index].isEdit = !state.List[index].isEdit
+    }
   },
   getters: {
     List: state => state.List,
-    Card: state => id => state.List.filter(c => c.id == id).pop(),
-    emptyText: state => {
+    Note: state => id => state.List.filter(c => c.id == id).pop(),
+    emptyNoteText: state => {
       return {
-        id: state.List.length,
-        Title: "Запись "+state.List.length,
+        id: state.List.length + 1,
+        Title: "Запись " + (state.List.length + 1),
         Top: 10,
         Left: 10,
         Witdh: 20,
@@ -67,7 +74,8 @@ var vuex = new Vuex.Store({
           Type: "Text",
           Font: { Size: 14, },
           Value: "Lorem ipsum..."
-        }
+        },
+        isEdit: false
       }
     },
     Move: state => state.Move,

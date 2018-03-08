@@ -1,7 +1,8 @@
 <template>
   <div>
     <Panel />
-    <Note v-for="(Note, index) in List" :card="Note" :id="Note.id" :key="`note-${index}`" />
+    <Note v-for="(Note, index) in List" :id="Note.id" :key="`note-${index}`" />
+    <ContextNote />
   </div>
 </template>
 

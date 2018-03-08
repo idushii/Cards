@@ -1,26 +1,25 @@
 <template>
-  <ul class="list-group" id="Panel" :style="{ top: pos.Top + 'px', left: pos.Left + 'px' }">
+  <ul class="list-group" id="Panel" :style="{ top: positionPanel.Top + 'px', left: positionPanel.Left + 'px' }">
     <li class="list-group-item list-group-item-dark" id="head-panel"
       @mousedown="startMovePanel"
       @mousemove="processMovePanel"
       @mouseup="endMovePanel"
     >Элементы</li>
-    <li class="list-group-item">Новая заметка</li>
+    <li class="list-group-item" @click="e => $store.commit('add', { Note: emptyNoteText })">Новая заметка</li>
     <li class="list-group-item">Новый список</li>
   </ul>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "Panel",
   data() {
     return {};
   },
   computed: {
-    pos() {
-      return this.$store.getters.positionPanel;
-    },
-    isMove() { return this.$store.getters.isMovePanel }
+    ...mapGetters(["emptyNoteText", "positionPanel"])
   },
   mounted() {},
   methods: {
