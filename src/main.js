@@ -11,10 +11,10 @@ Vue.prototype.moment = moment
 import router from './router.js'
 import store from './store'
 
-import Note from './Note.vue';                            Vue.component("Note", Note);
-import ContextNote from './ContextNote.vue';              Vue.component("ContextNote", ContextNote);
-import ContextListNotes from './ContextListNotes.vue';    Vue.component("ContextListNotes", ContextListNotes);
-import App from './App.vue';                              Vue.component("App", App);
+import Note from './Note.vue';                                        Vue.component("Note", Note);
+import ContextNote from './ContextMenu/ContextNote.vue';              Vue.component("ContextNote", ContextNote);
+import ContextListNotes from './ContextMenu/ContextListNotes.vue';    Vue.component("ContextListNotes", ContextListNotes);
+import App from './App.vue';                                          Vue.component("App", App);
 
 
 window.appVue = new Vue({

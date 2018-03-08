@@ -1,17 +1,15 @@
 <template>
-  <ul class="list-group" id="Panel" :style="{ top: positionPanel.Top + 'px', left: positionPanel.Left + 'px' }">
-    <li class="list-group-item list-group-item-dark" id="head-panel"
-      @mousedown="startMovePanel"
-      @mousemove="processMovePanel"
-      @mouseup="endMovePanel"
-    >Элементы</li>
-    <li class="list-group-item" @click="e => $store.commit('add', { Note: emptyNoteText })">Новая заметка</li>
-    <li class="list-group-item">Новый список</li>
-  </ul>
+  <div class="card" id="Panel" :style="{ top: positionPanel.Top + 'px', left: positionPanel.Left + 'px' }">
+    <div class="card-header" id="head-panel" @mousedown="startMovePanel" @mousemove="processMovePanel" @mouseup="endMovePanel">Элементы</div>
+    <ul class="list-group">
+      <li class="list-group-item" @click="e => $store.commit('add', { Note: emptyNoteText })">Новая заметка</li>
+      <li class="list-group-item">Новый список</li>
+    </ul>
+  </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex";
 
 export default {
   name: "Panel",
@@ -26,11 +24,10 @@ export default {
     startMovePanel(e) {
       this.$store.commit("startMovePanel", { Top: e.y, Left: e.x });
     },
-    processMovePanel(e) {
-    },
+    processMovePanel(e) {},
     endMovePanel(e) {
       this.$store.commit("endMovePanel");
-    },
+    }
   }
 };
 </script>

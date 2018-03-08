@@ -2,8 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import Panel from "./Panel"
-import ContextNote from "./ContextNote"
-import ContextListNotes from "./ContextListNotes"
+import ContextNote from "./ContextMenu/ContextNote"
+import ContextListNotes from "./ContextMenu/ContextListNotes"
 import Notes from "./Notes"
 
 Vue.use(Vuex)
