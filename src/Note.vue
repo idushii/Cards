@@ -1,7 +1,7 @@
 <template>
   <div
      class="card" 
-    :style="{width: `${Note.Width}px`, top: `${Note.Top}px`, left: `${Note.Left}px`}" 
+    :style="{width: Width, top: `${Note.Top}px`, left: `${Note.Left}px`}" 
     @click.right.prevent="e => $store.dispatch('showContex', {Top: e.y, Left: e.x, Show: true, id, Type: 'Note', e})">
     <div 
       class="card-header" 
@@ -39,8 +39,16 @@ export default {
       return this.$store.getters.Note(this.id);
     },
     ...mapState({
-        isMove: state => state.Notes.Move.isMove
-      })
+      isMove: state => state.Notes.Move.isMove
+    }),
+    Width() {
+      switch (this.Note.Size) {
+        case 'S': return '300px';
+        case 'M': return '500px';
+        case 'L': return '700px';
+          break;
+      }
+    }
   },
   mounted() {},
   methods: {

@@ -20,12 +20,14 @@ var vuex = new Vuex.Store({
   getters: {
   },
   actions: {
-    hideContext({commit, state}) {
-      commit('toggleContextNote', {Hide: true})
-      commit('toggleContextListNotes', {Hide: true})
+    hideContext({commit, state}, { e }) {
+      if ( !hasClass(e.path, "context-menu") ) {
+        commit('toggleContextNote', {Hide: true})
+        commit('toggleContextListNotes', {Hide: true})
+      }
     },
     showContex({commit, dispatch, state}, {Top, Left, Show, Hide, e, id, Type = 'Note'}) {
-      let isNote = e.path.slice(0, 3).map(p => p.classList.value).indexOf("card") > -1
+      let isNote = getClassList(e.path).indexOf("card") > -1
       if (isNote && Type == 'Note') {
         commit('toggleContextListNotes', {Hide: true})
         commit('toggleContextNote', {Top, Left, Show, Hide, id})
@@ -38,5 +40,12 @@ var vuex = new Vuex.Store({
   }
 })
 
+function getClassList(path) {
+  return path.slice(0, 3).map(p => p.classList.value)
+}
+
+function hasClass(path, className) {
+  return path.slice(0, 3).map(p => p.classList.value).reduce((result, item) => item.indexOf(className) == -1 ? result : true, false)
+}
 
 export default vuex;

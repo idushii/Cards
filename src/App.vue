@@ -1,7 +1,7 @@
 <template>
   <div id="app" 
     @mousemove="processMove" 
-    @click="$store.dispatch('hideContext')"
+    @click="e => $store.dispatch('hideContext', { e })"
     @click.right.prevent="e => $store.dispatch('showContex', {Top: e.y, Left: e.x, Show: true, Type: 'List', e})"
   >
     <router-view></router-view>

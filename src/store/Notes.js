@@ -5,8 +5,6 @@ let ListNotes = {
       Title: "Запись 1",
       Top: 500,
       Left: 10,
-      Witdh: 200,
-      Height: 100,
       Date: { Create: new Date(2018, 0, 1), Update: new Date(2018, 2, 1) },
       Style: { Background: "lightgrey", Color: "black" },
       Values: {
@@ -14,6 +12,7 @@ let ListNotes = {
         Font: { Size: 14, },
         Text: "Lorem ipsum..."
       },
+      Size: 'S', // Small Meduim Large
       isEdit: false
     }],
     Move: {
@@ -50,7 +49,10 @@ let ListNotes = {
     setTextNote(state, { index, Text }) {
       state.List[index].Values.Text = Text
       state.List[index].Date.Update = new Date()
-    }
+    },
+    setSizeNote(state, { index, Size }) {
+      state.List[index].Size = Size
+    },
   },
   getters: {
     ListNotes: state => state.List,
@@ -61,8 +63,7 @@ let ListNotes = {
         Title: "Запись " + (state.List.length + 1),
         Top: 10,
         Left: 10,
-        Witdh: 20,
-        Height: 20,
+        Size: 'S',
         Style: { Background: "lightgrey", Color: "black" },
         Date: { Create: new Date(), Update: new Date() },
         Values: {
@@ -81,11 +82,18 @@ let ListNotes = {
     toggleEditNote({state, commit, getters}, { id }) {
       let index = getters.indexNoteByID(id)
       commit('toggleEditNote', { index })
+      commit('toggleContextNote', {Hide: true})
     },
     setTextNote({state, commit, getters}, { id, Text }) {
       let index = getters.indexNoteByID(id)
       commit('setTextNote', { index, Text })
       commit('toggleEditNote', { index })
+      commit('save')
+    },
+    setSizeNote({state, commit, getters}, {id, Size = "S"}) {
+      let index = getters.indexNoteByID(id)
+      commit('setSizeNote', {index, Size})
+      commit('toggleContextNote', {Hide: true})
       commit('save')
     }
   }
