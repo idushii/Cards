@@ -9,9 +9,9 @@ Vue.prototype.moment = moment
 
 
 import router from './router.js'
-import store from './store.js'
+import store from './store'
 
-import Card from './Card.vue';  Vue.component("Card", Card);
+import Note from './Note.vue';  Vue.component("Note", Note);
 import App from './App.vue';    Vue.component("App", App);
 
 

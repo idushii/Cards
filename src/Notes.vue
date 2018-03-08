@@ -1,14 +1,16 @@
 <template>
   <div>
-    <Card v-for="(Card, index) in List" :card="Card" :id="Card.id" :key="`card-${index}`" @startMove="startMove" />
+    <Panel />
+    <Note v-for="(Note, index) in List" :card="Note" :id="Note.id" :key="`note-${index}`" />
   </div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import Panel from './Panel.vue'
 
 export default {
-  name: "Cards",
+  name: "Notes",
   data() {
     return {
     };
@@ -19,7 +21,8 @@ export default {
   mounted() {},
   methods: {
     startMove(e) { this.$emit('startMove', e) }
-  }
+  },
+  components: { Panel }
 };
 </script>
 

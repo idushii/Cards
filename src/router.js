@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import App from './App.vue'
-import Cards from './Cards.vue'
+import Notes from './Notes.vue'
 import Login from './Login.vue'
 
 Vue.use(VueRouter)
@@ -10,7 +10,7 @@ Vue.use(VueRouter)
 var router = new VueRouter({
   routes: [{
     path: '/',
-    component: Cards
+    component: Notes
   }, {
     path: '/Login',
     component: Login

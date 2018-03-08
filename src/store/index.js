@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
+import Panel from "./panel"
+
 Vue.use(Vuex)
 
 var vuex = new Vuex.Store({
+  modules: { Panel },
   state: {
     List: [{
       id: 1,

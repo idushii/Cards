@@ -6,7 +6,7 @@
       class="card-header" 
       :style="{cursor: isCtrl ? 'move' : 'default'}"
       @keyup.down="isCtrl = true"
-      @mousedown.ctrl="startMove" 
+      @mousedown.ctrl="e => $store.commit('startMove', { id, Top: e.y, Left: e.x })" 
       @mousemove="isCtrl = false"
       @mousemove.ctrl="processMove"
       @mouseup="endMove">
@@ -21,7 +21,7 @@ import { mapGetters } from "vuex";
 import moment from "moment";
 
 export default {
-  name: "Card",
+  name: "Note",
   props: { id: { type: Number, required: true } },
   data() {
     return {
@@ -36,9 +36,6 @@ export default {
   },
   mounted() {},
   methods: {
-    startMove(e) {
-      this.$emit('startMove', { id: this.id })
-    },
     processMove(e) {
       this.isCtrl = true
       if (this.isMove) {

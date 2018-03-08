@@ -1,6 +1,6 @@
 <template>
-  <div id="app" @mousemove="progressMove">
-    <router-view @startMove="startMove"></router-view>
+  <div id="app" @mousemove="processMove">
+    <router-view></router-view>
   </div>
 </template>
 
@@ -11,27 +11,18 @@ export default {
   name: "app",
   data() {
     return {
-      CurPos: { Top: null, Left: null }
     };
   },
   computed: {
-      ...mapGetters(["isMove"]),
+      ...mapGetters(["isMove", "isMovePanel"]),
   },
   methods: {
-    startMove(e) {
-      this.$store.commit("startMove", { ...e, ...this.CurPos });
-    },
-    progressMove(e) {
-      if (this.isMove) {
-        this.$store.commit("processMove", { Top: e.y, Left: e.x });
-      }
-      this.CurPos = { Top: e.y, Left: e.x }
+    processMove(e) {
+      if (this.isMove)        this.$store.commit("processMove", { Top: e.y, Left: e.x });
+      if (this.isMovePanel)   this.$store.commit("processMovePanel", { Top: e.y, Left: e.x });
     }
   },
   mounted() {
-    
-    //this.$store.commit("startMove", { id: this.id });
-
   }
 };
 </script>
