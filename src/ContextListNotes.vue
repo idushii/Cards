@@ -7,6 +7,7 @@
     @click.right.prevent
   >
     <li class="list-group-item">Показать панель элементов</li>
+    <li class="list-group-item">Построить</li>
     <!--li class="list-group-item list-group-item-primary">dddd</li>
     <li class="list-group-item list-group-item-secondary">dddd</li>
     <li class="list-group-item list-group-item-success">dddd</li>
