@@ -9,7 +9,7 @@
       @mousedown.left="e => $store.commit('startMove', { id, Top: e.y, Left: e.x })" 
       @mousemove.left="processMove"
       @mouseup.left="endMove">
-        {{Note.Title}}</div>
+        {{Note.Title}} <small>от {{Note.Date.Create | momentDate}}</small></div>
     <div class="card-body" v-if="!Note.isEdit">{{Note.Values.Text}}</div>
     <div class="card-body" v-if="Note.isEdit">
       <textarea 
@@ -58,6 +58,10 @@ export default {
       return moment(date_)
         .locale("ru")
         .fromNow();
+    },
+    momentDate: function(date_) {
+      return moment(date_)
+        .locale("ru").format("Do MMM YY")
     }
   }
 };
